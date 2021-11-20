@@ -11,6 +11,7 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Table(indexes = {
         @Index(name = "idx_CurrentTournamentController", columnList = "currentTournamentRepository")
@@ -43,18 +44,7 @@ class CurrentTournamentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-    @GetMapping("/currentTournament/{startDate}")
-    public ResponseEntity getCurrentTournamentsById(@PathVariable("startDate") String startDate) {
-        Optional<CurrentTournament> currentTournaments = currentTournamentRepository.findByStartDate(startDate);
-
-        if (currentTournaments.isPresent()) {
-            return new ResponseEntity<>(currentTournaments.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+    /*
     @PostMapping("/currentTournament")
     public ResponseEntity<CurrentTournament> createCurrentTournament(@RequestBody CurrentTournament currentTournament) {
         try {
@@ -117,5 +107,5 @@ class CurrentTournamentController {
         }
     }
 
-
+*/
 }
