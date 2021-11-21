@@ -1,6 +1,15 @@
 package com.keyin.demo.accessdatarest;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Membership {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int Id;
     private String normal;
     private String trial;
     private String specialOffer;
@@ -10,12 +19,17 @@ public class Membership {
     public Membership() {
     }
 
-    public Membership(String normal, String trial, String specialOffer, String familyPlan, String other) {
+    public Membership(int Id, String normal, String trial, String specialOffer, String familyPlan, String other) {
+        this.Id = Id;
         this.normal = normal;
         this.trial = trial;
         this.specialOffer = specialOffer;
         this.familyPlan = familyPlan;
         this.other = other;
+    }
+
+    public int getId() {
+        return Id;
     }
 
     public String getNormal() {
@@ -56,5 +70,12 @@ public class Membership {
 
     public void setOther(String other) {
         this.other = other;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public static void add(Object o) {
     }
 }

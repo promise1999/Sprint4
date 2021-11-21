@@ -1,3 +1,4 @@
+
 package com.keyin.demo.restservice;
 
 import com.keyin.demo.Repository.MembershipRepository;
@@ -11,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.keyin.demo.Repository.PastTournamentRepository;
-import com.keyin.demo.Repository.PersonRepository;
 import com.keyin.demo.accessdatarest.Membership;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,23 +25,22 @@ import org.springframework.web.bind.annotation.RestController;
     @CrossOrigin(origins = "http://localhost:8081")
     @RestController
     @RequestMapping("/api")
-    public class MembershipController {
-
+public class MembershipController {
 
         @Autowired
-        public Membership membership;
+        MembershipRepository membershipRepository;
 
 
-        @GetMapping("/normal")
-        public ResponseEntity<List<Membership >> getAllMembership(@RequestParam(required = false) String normal) {
+        @GetMapping("/Membership")
+        public ResponseEntity<List<Membership>> getAllMembership(@RequestParam(required = false) int Id) {
             try {
                 List<Membership> memberships = new ArrayList<Membership>();
 
-                if (Id == null)
-                    MembershipRepository.findByNormal().forEach(Membership::add);
-                else MembershipRepository.findByNormal().forEach(Membership::add);
+                if (Id == 0) {
+                    membershipRepository.findAll().forEach(Membership::add);
+                } else membershipRepository.findById(Id).forEach(memberships::add);
 
-                if (Membership.isEmpty()) {
+                if (memberships.isEmpty()) {
                     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
                 }
 
@@ -51,13 +49,15 @@ import org.springframework.web.bind.annotation.RestController;
                 return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
-
-
     }
 
 
-    /*
+         /*
     If family plan – indicate which other members in the database, if any,
     are connected on their plan.
     If other – you should include the monthly membership cost.
-     */
+    }
+ */
+
+
+
