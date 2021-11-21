@@ -22,9 +22,8 @@ public class Person {
     public Person() {
     }
 
-    public Person(int id, String firstName, String lastName, String emailAddress,
+    public Person(String firstName, String lastName, String emailAddress,
                   int phoneNumber, LocalDate startDate, LocalDate endDate) {
-        this.Id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
@@ -87,6 +86,9 @@ public class Person {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public static void add(Person person) {
     }
 }
 

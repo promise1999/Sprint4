@@ -13,19 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Table(indexes = {
-        @Index(name = "idx_CurrentTournamentController", columnList = "currentTournamentRepository")
-})
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-class CurrentTournamentController {
+public class CurrentTournamentController {
 
     @Autowired
     CurrentTournamentRepository currentTournamentRepository;
 
 
-    @GetMapping("/startDate")
+    @GetMapping("/CurrentTournament")
     public ResponseEntity<List<CurrentTournament>> getAllCurrentTournament(@RequestParam(required = false) String startDate) {
         try {
             List<CurrentTournament> currentTournaments = new ArrayList<CurrentTournament>();
@@ -44,8 +41,8 @@ class CurrentTournamentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    /*
-    @PostMapping("/currentTournament")
+
+    @PostMapping("/CurrentTournament")
     public ResponseEntity<CurrentTournament> createCurrentTournament(@RequestBody CurrentTournament currentTournament) {
         try {
             CurrentTournament _currentTournament = currentTournamentRepository
@@ -56,10 +53,10 @@ class CurrentTournamentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+/*
     @PutMapping("/currentTournament/{startDate}")
     public ResponseEntity<CurrentTournament> CurrentTournament(@PathVariable("startDate") String startDate, @RequestBody CurrentTournament currentTournament) {
-        Optional<CurrentTournament> CurrentTournament = currentTournamentRepository.findByStartDate(startDate);
+        List<CurrentTournament> CurrentTournament = currentTournamentRepository.findByStartDate(startDate);
 
         if (currentTournament.isPresent()) {
             CurrentTournament _currentTournament = currentTournament.get();

@@ -1,3 +1,4 @@
+
 package com.keyin.demo.restservice;
 
 import java.util.ArrayList;
@@ -16,18 +17,22 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
 
     @Autowired
-    public Person person;
+    PersonRepository personRepository;
 
-    @GetMapping("/Id")
+    @GetMapping("/Person")
     public ResponseEntity<List<Person>> getAllPerson(@RequestParam(required = false) int Id) {
         try {
             List<Person> person = new ArrayList<Person>();
 
             if (Id == 0)
-                PersonRepository.findById().forEach(Person::add);
-            else PersonRepository.findById().forEach(Person::add);
+                personRepository.findAll().forEach(Person::add);
+            else {
+                for (Person person1 : personRepository.findById(Id)) {
+                    person.add(person1);
+                }
+            }
 
-            if (Person.isEmpty()) {
+            if (person.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
@@ -36,7 +41,7 @@ public class PersonController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+/*
     @GetMapping("/person/{Id}")
     public ResponseEntity getCurrentTournamentsById(@PathVariable("startDate") int Id) {
         Optional<Person> person = PersonRepository.findById(Id);
@@ -95,4 +100,6 @@ public class PersonController {
         }
 
     }
+
+*/
 }

@@ -1,8 +1,16 @@
 package com.keyin.demo.accessdatarest;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
-public class PastTournament {
+@Entity
+public class CurrentTournament {
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int Id;
     private LocalDate startDate;
     private LocalDate endDate;
     private String location;
@@ -11,7 +19,7 @@ public class PastTournament {
     private String participatingMembers;
     private String finalStandings;
 
-    public CurrentTournament(LocalDate startDate, String finalStandings, boolean b) {
+    public CurrentTournament() {
     }
 
     public CurrentTournament(LocalDate startDate, LocalDate endDate,
@@ -24,6 +32,9 @@ public class PastTournament {
         this.prizeAmount = prizeAmount;
         this.participatingMembers = participatingMembers;
         this.finalStandings = finalStandings;
+    }
+
+    public CurrentTournament(LocalDate startDate, String finalStandings, boolean b) {
     }
 
     public LocalDate getStartDate() {
@@ -80,5 +91,13 @@ public class PastTournament {
 
     public void setFinalStandings(String finalStandings) {
         this.finalStandings = finalStandings;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 }

@@ -1,3 +1,4 @@
+
 package com.keyin.demo.Repository;
 
 import com.keyin.demo.accessdatarest.CurrentTournament;
@@ -16,12 +17,13 @@ public interface PastTournamentRepository extends PagingAndSortingRepository<Pas
     }
 
     List<PastTournament> findByEndDate(@Param("endDate") String endDate);
+    /*
     List<PastTournament> findByLocation(@Param("location") String location);
     List<PastTournament> findByEntryFee(@Param("entryFee") double entryFee);
     List<PastTournament> findByPrizeAmount(@Param("prizeAmount") int prizeAmount);
     List<PastTournament> findByParticipatingMember(@Param("participatingMember") String participatingMember);
     List<PastTournament> findByFinalStanding(@Param("finalStanding") String finalStanding);
-
+*/
 
 }
 

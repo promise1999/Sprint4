@@ -1,3 +1,4 @@
+
 package com.keyin.demo.restservice;
 
 import com.keyin.demo.Repository.PastTournamentRepository;
@@ -12,28 +13,26 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table(indexes = {
-        @Index(name = "idx_PastTournamentController", columnList = "pastTournamentRepository")
-})
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-class PastTournamentController {
 
+
+public class PastTournamentController {
 
     @Autowired
-    PastTournamentController pastTournamentController;
+    PastTournamentRepository pastTournamentRepository;
 
 
-    @GetMapping("/endDate")
+    @GetMapping("/PastTournament")
     public ResponseEntity<List<PastTournament>> getAllPastTournament(@RequestParam(required = false) String endDate) {
         try {
             List<PastTournament> pastTournaments = new ArrayList<PastTournament>();
 
             if (endDate == null)
-                PastTournamentRepository.findAll().forEach(pastTournaments::add);
+                pastTournamentRepository.findAll().forEach(pastTournaments::add);
             else
-                PastTournamentRepository.findByEndDate(endDate).forEach(PastTournament::add);
+                pastTournamentRepository.findByEndDate(endDate).forEach(pastTournaments::add);
 
             if (pastTournaments.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -45,32 +44,21 @@ class PastTournamentController {
         }
     }
 
-
-    @GetMapping("/pastTournament/{endDate}")
-    public ResponseEntity getPastTournamentsById(@PathVariable("endDate") String endDate) {
-        Optional<PastTournament> pastTournaments = PastTournamentRepository.findByEndDate(endDate);
-
-        if (pastTournaments.isPresent()) {
-            return new ResponseEntity<>(pastTournaments.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-    @PostMapping("/pastTournament")
-    public ResponseEntity<pastTournament> createPastTournament(@RequestBody PastTournament pastTournament) {
+/*
+    @PostMapping("/PastTournament")
+    public ResponseEntity<PastTournament> createPastTournament(@RequestBody PastTournament pastTournament) {
         try {
             PastTournament _pastTournament = PastTournamentRepository
-                    .save(new PastTournament(pastTournament.getEndDate(),
-                            pastTournament.getFinalStandings(), false));
+                    .save(new PastTournament(pastTournament.getEndDate(), pastTournament.getFinalStandings(), false));
             return new ResponseEntity<>(_pastTournament, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+/*
     @PutMapping("/pastTournament/{endDate}")
     public ResponseEntity<PastTournament> updatePastTournament(@PathVariable("endDate") String endDate, @RequestBody PastTournament pastTournament) {
-        Optional<PastTournament>PastTournament = PastTournamentRepository.findByEndDate(endDate);
+        Optional<PastTournament> PastTournament = PastTournamentRepository.findByEndDate(endDate);
 
         if (pastTournament.isPresent()) {
             PastTournament _pastTournament = pastTournament.get();
@@ -117,6 +105,10 @@ class PastTournamentController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+*/
+}
+
 
 
 
