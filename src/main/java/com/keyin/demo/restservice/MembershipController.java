@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.keyin.demo.accessdatarest.Membership;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,13 +65,41 @@ public class MembershipController {
                 return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
-    }
+
+        @PutMapping("/membership/{Id}")
+        public ResponseEntity<Membership> updateMembership(@PathVariable("Id") long Id, @RequestBody Membership membership) {
+            Optional<Membership> membershipData = membershipRepository.findById(Id);
+
+            if (membershipData.isPresent()) {
+                Membership _member = membershipData.get();
+                _member.setNormal(membership.getNormal());
+                _member.setTrial(membership.getTrial());
+                _member.setSpecialOffer(membership.getSpecialOffer());
+                _member.setFamilyPlan(membership.getFamilyPlan());
+                _member.setOther(membership.getOther());
+                return new ResponseEntity<>(membershipRepository.save(_member), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+
+        @DeleteMapping("/membership/{Id}")
+        public ResponseEntity<HttpStatus> deleteMembership(@PathVariable("Id") long Id) {
+            try {
+                membershipRepository.deleteById(Id);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
 /*
     If family plan – indicate which other members in the database, if any,
     are connected on their plan.
     If other – you should include the monthly membership cost.
-    }
+
  */
+    }
+
 
 
 
