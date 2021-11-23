@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -54,24 +55,28 @@ public class CurrentTournamentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-/*
-    @PutMapping("/CurrentTournament/{startDate}")
-    public ResponseEntity<CurrentTournament> updateCurrentTournament(@PathVariable("startDate") String startDate, @RequestBody CurrentTournament currentTournament) {
-        List<CurrentTournament> CurrentTournament = currentTournamentRepository.findByStartDate(startDate);
 
-        if (currentTournament.isPresent()) {
-            CurrentTournament _currentTournament = currentTournament.get();
+    @PutMapping("/currentTournament/{Id}")
+    public ResponseEntity<CurrentTournament> updateCurrentTournament(@PathVariable("Id") long Id, @RequestBody CurrentTournament currentTournament) {
+        Optional<CurrentTournament> currentTournamentsData = currentTournamentRepository.findById(Id);
+
+        if (currentTournamentsData.isPresent()) {
+            CurrentTournament _currentTournament = currentTournamentsData.get();
             _currentTournament.setStartDate(currentTournament.getStartDate());
+            _currentTournament.setEndDate(currentTournament.getEndDate());
+            _currentTournament.setLocation(currentTournament.getLocation());
+            _currentTournament.setEntryFee(currentTournament.getEntryFee());
+            _currentTournament.setPrizeAmount(currentTournament.getPrizeAmount());
+            _currentTournament.setParticipatingMembers(currentTournament.getParticipatingMembers());
             _currentTournament.setFinalStandings(currentTournament.getFinalStandings());
-            _currentTournament.setPublished(currentTournament.isPublished());
             return new ResponseEntity<>(currentTournamentRepository.save(_currentTournament), HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/CurrentTournament/{startDate}")
-    public ResponseEntity<HttpStatus> deleteCurrentTournament(@PathVariable("startDate") String startDate) {
+    @DeleteMapping("/CurrentTournament/{Id}")
+    public ResponseEntity<HttpStatus> deleteCurrentTournament(@PathVariable("Id") long Id) {
         try {
-            currentTournamentRepository.deleteByStartDate(startDate);
+            currentTournamentRepository.deleteById(Id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
