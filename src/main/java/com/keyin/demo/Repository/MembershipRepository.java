@@ -12,7 +12,7 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "Membership", path = "Membership")
 public interface MembershipRepository extends PagingAndSortingRepository<Membership, Long> {
 
-    List<Membership> findByLastName(@Param("lastName") String  lastName);
+    List<Membership> findByNormal(@Param("normal") String  normal);
 
 
     /*

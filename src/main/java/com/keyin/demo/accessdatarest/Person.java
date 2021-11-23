@@ -76,6 +76,10 @@ public class Person {
         return startDate;
     }
 
+    public LocalDate getStartDate(){
+        return startDate;
+    }
+
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }

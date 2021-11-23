@@ -12,7 +12,7 @@ import java.util.List;
     @RepositoryRestResource(collectionResourceRel = "CurrentTournament", path = "CurrentTournament")
     public interface CurrentTournamentRepository extends PagingAndSortingRepository<CurrentTournament, Long> {
 
-        List<CurrentTournament> findByLastName(@Param("lastName") String lastName);
+        List<CurrentTournament> findByStartDate(@Param("startDate") String startDate);
         //List<CurrentTournament> deleteByStartDate(@Param("startDate") String startDate);
 
 

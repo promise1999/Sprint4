@@ -3,6 +3,7 @@ package com.keyin.demo.restservice;
 
 import com.keyin.demo.Repository.PastTournamentRepository;
 import com.keyin.demo.accessdatarest.PastTournament;
+import org.apache.tomcat.util.net.SendfileDataBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,15 +25,15 @@ public class PastTournamentController {
     PastTournamentRepository pastTournamentRepository;
 
 
-    @GetMapping("/PastTournament")
-    public ResponseEntity<List<PastTournament>> getAllPastTournament(@RequestParam(required = false) String lastName) {
+    @GetMapping("/pastTournament")
+    public ResponseEntity<List<PastTournament>> getAllPastTournament(@RequestParam(required = false) String endDate) {
         try {
             List<PastTournament> pastTournaments = new ArrayList<PastTournament>();
 
-            if (lastName == null)
+            if (endDate == null)
                 pastTournamentRepository.findAll().forEach(pastTournaments::add);
             else
-                pastTournamentRepository.findByLastName(lastName).forEach(pastTournaments::add);
+                pastTournamentRepository.findByEndDate(endDate).forEach(pastTournaments::add);
 
             if (pastTournaments.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -44,18 +45,18 @@ public class PastTournamentController {
         }
     }
 
-/*
-    @PostMapping("/PastTournament")
+    @PostMapping("/pastTournament")
     public ResponseEntity<PastTournament> createPastTournament(@RequestBody PastTournament pastTournament) {
         try {
-            PastTournament _pastTournament = PastTournamentRepository
-                    .save(new PastTournament(pastTournament.getEndDate(), pastTournament.getFinalStandings(), false));
+            PastTournament _pastTournament = pastTournamentRepository
+                    .save(new PastTournament(pastTournament.getStartDate(), pastTournament.getEndDate(), pastTournament.getLocation(), pastTournament.getEntryFee(),
+                            pastTournament.getPrizeAmount(), pastTournament.getParticipatingMembers(), pastTournament.getFinalStandings()));
             return new ResponseEntity<>(_pastTournament, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+/*
     @PutMapping("/pastTournament/{endDate}")
     public ResponseEntity<PastTournament> updatePastTournament(@PathVariable("endDate") String endDate, @RequestBody PastTournament pastTournament) {
         Optional<PastTournament> PastTournament = PastTournamentRepository.findByEndDate(endDate);
