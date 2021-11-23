@@ -32,15 +32,15 @@ public class MembershipController {
         MembershipRepository membershipRepository;
 
 
-        @GetMapping("/Membership")
-        public ResponseEntity<List<Membership>> getAllMembership(@RequestParam(required = false) String lastName) {
+        @GetMapping("/membership")
+        public ResponseEntity<List<Membership>> getAllMembership(@RequestParam(required = false) String normal) {
             try {
                 List<Membership> memberships = new ArrayList<Membership>();
 
-                if (lastName == null) {
+                if (normal == null) {
                     membershipRepository.findAll().forEach(memberships::add);
                 } else {
-                    membershipRepository.findByLastName(lastName).forEach(memberships::add);
+                    membershipRepository.findByNormal(normal).forEach(memberships::add);
                 }
 
                 if (memberships.isEmpty()) {
@@ -52,9 +52,19 @@ public class MembershipController {
                 return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
+
+        @PostMapping("/membership")
+        public ResponseEntity<Membership> createMembership(@RequestBody Membership membership) {
+            try {
+                Membership _membership = membershipRepository
+                        .save(new Membership(membership.getNormal(), membership.getTrial(), membership.getSpecialOffer(),
+                                membership.getFamilyPlan(), membership.getOther()));
+                return new ResponseEntity<>(_membership, HttpStatus.CREATED);
+            } catch (Exception e) {
+                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
     }
-
-
 /*
     If family plan – indicate which other members in the database, if any,
     are connected on their plan.

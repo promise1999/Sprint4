@@ -17,7 +17,6 @@ public class CurrentTournament {
     private int prizeAmount;
     private String participatingMembers;
     private String finalStandings;
-    private String CurrentTournament;
 
     public CurrentTournament() {
     }
