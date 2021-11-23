@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
     @CrossOrigin(origins = "http://localhost:8081")
     @RestController
     @RequestMapping("/api")
+
 public class MembershipController {
 
         @Autowired
@@ -32,13 +33,15 @@ public class MembershipController {
 
 
         @GetMapping("/Membership")
-        public ResponseEntity<List<Membership>> getAllMembership(@RequestParam(required = false) int Id) {
+        public ResponseEntity<List<Membership>> getAllMembership(@RequestParam(required = false) String lastName) {
             try {
                 List<Membership> memberships = new ArrayList<Membership>();
 
-                if (Id == 0) {
-                    membershipRepository.findAll().forEach(Membership::add);
-                } else membershipRepository.findById(Id).forEach(memberships::add);
+                if (lastName == null) {
+                    membershipRepository.findAll().forEach(memberships::add);
+                } else {
+                    membershipRepository.findByLastName(lastName).forEach(memberships::add);
+                }
 
                 if (memberships.isEmpty()) {
                     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,7 +55,7 @@ public class MembershipController {
     }
 
 
-         /*
+/*
     If family plan – indicate which other members in the database, if any,
     are connected on their plan.
     If other – you should include the monthly membership cost.

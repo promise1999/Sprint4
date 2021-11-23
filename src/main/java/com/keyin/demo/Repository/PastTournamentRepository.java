@@ -12,11 +12,7 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "PastTournament", path = "PastTournament")
 public interface PastTournamentRepository extends PagingAndSortingRepository<PastTournament, Long> {
 
-    default List<PastTournament> findByEndDate() {
-        return findByEndDate();
-    }
-
-    List<PastTournament> findByEndDate(@Param("endDate") String endDate);
+    List<PastTournament> findByLastName(@Param("lastName") String lastName);
     /*
     List<PastTournament> findByLocation(@Param("location") String location);
     List<PastTournament> findByEntryFee(@Param("entryFee") double entryFee);

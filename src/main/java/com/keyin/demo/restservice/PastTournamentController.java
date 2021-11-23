@@ -25,14 +25,14 @@ public class PastTournamentController {
 
 
     @GetMapping("/PastTournament")
-    public ResponseEntity<List<PastTournament>> getAllPastTournament(@RequestParam(required = false) String endDate) {
+    public ResponseEntity<List<PastTournament>> getAllPastTournament(@RequestParam(required = false) String lastName) {
         try {
             List<PastTournament> pastTournaments = new ArrayList<PastTournament>();
 
-            if (endDate == null)
+            if (lastName == null)
                 pastTournamentRepository.findAll().forEach(pastTournaments::add);
             else
-                pastTournamentRepository.findByEndDate(endDate).forEach(pastTournaments::add);
+                pastTournamentRepository.findByLastName(lastName).forEach(pastTournaments::add);
 
             if (pastTournaments.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -55,7 +55,7 @@ public class PastTournamentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-/*
+
     @PutMapping("/pastTournament/{endDate}")
     public ResponseEntity<PastTournament> updatePastTournament(@PathVariable("endDate") String endDate, @RequestBody PastTournament pastTournament) {
         Optional<PastTournament> PastTournament = PastTournamentRepository.findByEndDate(endDate);

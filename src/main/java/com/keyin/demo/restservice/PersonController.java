@@ -19,17 +19,15 @@ public class PersonController {
     @Autowired
     PersonRepository personRepository;
 
-    @GetMapping("/Person")
-    public ResponseEntity<List<Person>> getAllPerson(@RequestParam(required = false) int Id) {
+    @GetMapping("/person")
+    public ResponseEntity<List<Person>> getAllPerson(@RequestParam(required = false) String lastName) {
         try {
             List<Person> person = new ArrayList<Person>();
 
-            if (Id == 0)
-                personRepository.findAll().forEach(Person::add);
+            if (lastName == null)
+                personRepository.findAll().forEach(person::add);
             else {
-                for (Person person1 : personRepository.findById(Id)) {
-                    person.add(person1);
-                }
+                personRepository.findByLastName(lastName).forEach(person::add);
             }
 
             if (person.isEmpty()) {
@@ -43,7 +41,7 @@ public class PersonController {
     }
 /*
     @GetMapping("/person/{Id}")
-    public ResponseEntity getCurrentTournamentsById(@PathVariable("startDate") int Id) {
+    public ResponseEntity getCurrentTournamentsById(@PathVariable("Id") int Id) {
         Optional<Person> person = PersonRepository.findById(Id);
 
         if (person.isPresent()) {

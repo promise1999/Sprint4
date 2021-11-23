@@ -22,15 +22,15 @@ public class CurrentTournamentController {
     CurrentTournamentRepository currentTournamentRepository;
 
 
-    @GetMapping("/CurrentTournament")
-    public ResponseEntity<List<CurrentTournament>> getAllCurrentTournament(@RequestParam(required = false) String startDate) {
+    @GetMapping("/currentTournament")
+    public ResponseEntity<List<CurrentTournament>> getAllCurrentTournament(@RequestParam(required = false) String lastName) {
         try {
             List<CurrentTournament> currentTournaments = new ArrayList<CurrentTournament>();
 
-            if (startDate == null)
+            if (lastName == null)
                 currentTournamentRepository.findAll().forEach(currentTournaments::add);
             else
-                currentTournamentRepository.findByStartDate(startDate).forEach(currentTournaments::add);
+                currentTournamentRepository.findByLastName(lastName).forEach(currentTournaments::add);
 
             if (currentTournaments.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -41,7 +41,7 @@ public class CurrentTournamentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+/*
     @PostMapping("/CurrentTournament")
     public ResponseEntity<CurrentTournament> createCurrentTournament(@RequestBody CurrentTournament currentTournament) {
         try {
@@ -53,9 +53,9 @@ public class CurrentTournamentController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-/*
-    @PutMapping("/currentTournament/{startDate}")
-    public ResponseEntity<CurrentTournament> CurrentTournament(@PathVariable("startDate") String startDate, @RequestBody CurrentTournament currentTournament) {
+
+    @PutMapping("/CurrentTournament/{startDate}")
+    public ResponseEntity<CurrentTournament> updateCurrentTournament(@PathVariable("startDate") String startDate, @RequestBody CurrentTournament currentTournament) {
         List<CurrentTournament> CurrentTournament = currentTournamentRepository.findByStartDate(startDate);
 
         if (currentTournament.isPresent()) {
@@ -64,21 +64,19 @@ public class CurrentTournamentController {
             _currentTournament.setFinalStandings(currentTournament.getFinalStandings());
             _currentTournament.setPublished(currentTournament.isPublished());
             return new ResponseEntity<>(currentTournamentRepository.save(_currentTournament), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/currentTournament/{startDate}")
+    @DeleteMapping("/CurrentTournament/{startDate}")
     public ResponseEntity<HttpStatus> deleteCurrentTournament(@PathVariable("startDate") String startDate) {
         try {
-            CurrentTournamentRepository.deleteByStartDate(startDate);
+            currentTournamentRepository.deleteByStartDate(startDate);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+/*
     @DeleteMapping("/currentTournament")
     public ResponseEntity<HttpStatus> deleteAllCurrentTournament() {
         try {

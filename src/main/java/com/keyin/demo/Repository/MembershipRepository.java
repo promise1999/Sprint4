@@ -12,11 +12,9 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "Membership", path = "Membership")
 public interface MembershipRepository extends PagingAndSortingRepository<Membership, Long> {
 
-    List<Membership> findById(@Param("Id") int Id);
+    List<Membership> findByLastName(@Param("lastName") String  lastName);
 
-    default Iterable<Object> findById() {
-        return null;
-    }
+
     /*
     List<Membership> findByStartDate(@Param("startDate") String startDate);
     List<Membership> findByEndDate(@Param("name") String endDate);

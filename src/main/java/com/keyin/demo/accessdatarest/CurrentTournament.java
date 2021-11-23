@@ -3,14 +3,13 @@ package com.keyin.demo.accessdatarest;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
 public class CurrentTournament {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private long Id;
     private LocalDate startDate;
     private LocalDate endDate;
     private String location;
@@ -18,6 +17,7 @@ public class CurrentTournament {
     private int prizeAmount;
     private String participatingMembers;
     private String finalStandings;
+    private String CurrentTournament;
 
     public CurrentTournament() {
     }
@@ -32,9 +32,6 @@ public class CurrentTournament {
         this.prizeAmount = prizeAmount;
         this.participatingMembers = participatingMembers;
         this.finalStandings = finalStandings;
-    }
-
-    public CurrentTournament(LocalDate startDate, String finalStandings, boolean b) {
     }
 
     public LocalDate getStartDate() {
@@ -93,11 +90,13 @@ public class CurrentTournament {
         this.finalStandings = finalStandings;
     }
 
-    public int getId() {
+    public long getId() {
         return Id;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setId(long Id) {
+        Id = Id;
     }
+
+
 }

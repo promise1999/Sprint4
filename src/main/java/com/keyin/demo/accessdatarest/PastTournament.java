@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class PastTournament {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private long Id;
     private LocalDate startDate;
     private LocalDate endDate;
     private String location;
@@ -32,10 +32,6 @@ public class PastTournament {
         this.prizeAmount = prizeAmount;
         this.participatingMembers = participatingMembers;
         this.finalStandings = finalStandings;
-    }
-
-    public PastTournament(LocalDate startDate, String finalStandings, boolean b) {
-
     }
 
     public LocalDate getStartDate() {
@@ -94,11 +90,11 @@ public class PastTournament {
         this.finalStandings = finalStandings;
     }
 
-    public int getId() {
+    public long getId() {
         return Id;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setId(long Id) {
+        Id = Id;
     }
 }

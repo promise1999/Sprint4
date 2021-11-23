@@ -1,4 +1,3 @@
-
 package com.keyin.demo.Repository;
 
 import com.keyin.demo.accessdatarest.Person;
@@ -9,11 +8,13 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.time.LocalDate;
 import java.util.List;
 
-    @RepositoryRestResource(collectionResourceRel = "people", path = "people")
+    @RepositoryRestResource(collectionResourceRel = "person", path = "person")
     public interface PersonRepository extends PagingAndSortingRepository<Person, Long> {
 
-        List<Person> findById(@Param("Id") int Id);
+        List<Person> findByLastName(@Param("lastName") String lastName);
+
         /*
+        List<Person> findById(@Param("Id") Integer Id);
         List<Person> findByFirstName(@Param("name") String name);
         List<Person> findByLastName(@Param("name") String name);
         List<Person> findByEmailAddress(@Param("emailAddress") String emailAddress);
