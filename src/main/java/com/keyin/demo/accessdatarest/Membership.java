@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Membership {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private long Id;
     private String normal;
     private String trial;
     private String specialOffer;
@@ -19,8 +19,7 @@ public class Membership {
     public Membership() {
     }
 
-    public Membership(int Id, String normal, String trial, String specialOffer, String familyPlan, String other) {
-        this.Id = Id;
+    public Membership(String normal, String trial, String specialOffer, String familyPlan, String other) {
         this.normal = normal;
         this.trial = trial;
         this.specialOffer = specialOffer;
@@ -28,7 +27,7 @@ public class Membership {
         this.other = other;
     }
 
-    public int getId() {
+    public long getId() {
         return Id;
     }
 
@@ -72,10 +71,9 @@ public class Membership {
         this.other = other;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setId(long Id) {
+        this.Id = Id;
     }
 
-    public static void add(Object o) {
-    }
+
 }

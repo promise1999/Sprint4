@@ -11,7 +11,7 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private long Id;
     private String firstName;
     private String lastName;
     private String emailAddress;
@@ -32,12 +32,12 @@ public class Person {
         this.endDate = endDate;
     }
 
-    public int getId() {
+    public long getId() {
         return Id;
     }
 
-    public void setId(int id) {
-        this.Id = id;
+    public void setId(long Id) {
+        this.Id = Id;
     }
 
     public String getFirstName() {
@@ -88,8 +88,6 @@ public class Person {
         this.endDate = endDate;
     }
 
-    public static void add(Person person) {
-    }
 }
 
 
