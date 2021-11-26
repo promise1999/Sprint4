@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "Membership", path = "Membership")
+@RepositoryRestResource(collectionResourceRel = "membership", path = "membership")
 public interface MembershipRepository extends PagingAndSortingRepository<Membership, Long> {
 
     List<Membership> findByNormal(@Param("normal") String  normal);

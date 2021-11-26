@@ -72,10 +72,6 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDate getID() {
-        return startDate;
-    }
-
     public LocalDate getStartDate(){
         return startDate;
     }

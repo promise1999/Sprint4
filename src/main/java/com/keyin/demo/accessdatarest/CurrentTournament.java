@@ -1,8 +1,6 @@
 package com.keyin.demo.accessdatarest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -17,6 +15,13 @@ public class CurrentTournament {
     private int prizeAmount;
     private String participatingMembers;
     private String finalStandings;
+    @OneToOne
+    @JoinColumn(name = "person_Id")
+    private Person person;
+
+    public Person getPerson() {
+        return person;
+    }
 
     public CurrentTournament() {
     }
