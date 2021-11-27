@@ -19,10 +19,6 @@ public class CurrentTournament {
     @JoinColumn(name = "person_Id")
     private Person person;
 
-    public Person getPerson() {
-        return person;
-    }
-
     public CurrentTournament() {
     }
 

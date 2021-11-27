@@ -48,7 +48,7 @@ public class MembershipController {
                 return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
-/*
+
         @PostMapping("/membership")
         public ResponseEntity<Membership> createMembership(@RequestBody Membership membership) {
             try {
@@ -95,6 +95,6 @@ public class MembershipController {
     If other – you should include the monthly membership cost.
     }
  */
-    }
+
 
 

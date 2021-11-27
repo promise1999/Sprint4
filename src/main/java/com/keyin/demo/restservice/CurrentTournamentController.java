@@ -2,6 +2,7 @@ package com.keyin.demo.restservice;
 
 import com.keyin.demo.Repository.CurrentTournamentRepository;
 import com.keyin.demo.accessdatarest.CurrentTournament;
+import com.keyin.demo.accessdatarest.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,16 @@ public class CurrentTournamentController {
             return new ResponseEntity<>(currentTournaments, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/currentTournament/{Id}")
+    public ResponseEntity<CurrentTournament> getPersonById(@PathVariable("Id") long Id) {
+        Optional<CurrentTournament> currentTournamentData = currentTournamentRepository.findById(Id);
+        if (currentTournamentData.isPresent()){
+            return new ResponseEntity<>(currentTournamentData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

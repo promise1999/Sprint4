@@ -22,6 +22,7 @@ public class Person {
     public Person() {
     }
 
+
     public Person(String firstName, String lastName, String emailAddress,
                   int phoneNumber, LocalDate startDate, LocalDate endDate) {
         this.firstName = firstName;
