@@ -1,9 +1,6 @@
 package com.keyin.demo.accessdatarest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Membership {
@@ -15,6 +12,13 @@ public class Membership {
     private String specialOffer;
     private String familyPlan;
     private String other;
+    @OneToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
+
+    public Person getPerson() {
+        return person;
+    }
 
     public Membership() {
     }

@@ -2,6 +2,7 @@
 package com.keyin.demo.restservice;
 
 import com.keyin.demo.Repository.PastTournamentRepository;
+import com.keyin.demo.accessdatarest.CurrentTournament;
 import com.keyin.demo.accessdatarest.PastTournament;
 import org.apache.tomcat.util.net.SendfileDataBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,16 @@ public class PastTournamentController {
             return new ResponseEntity<>(pastTournaments, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/pastTournament/{Id}")
+    public ResponseEntity<PastTournament> getCurrentTournamentById(@PathVariable("Id") long Id) {
+        Optional<PastTournament> pastTournamentData = pastTournamentRepository.findById(Id);
+        if (pastTournamentData.isPresent()){
+            return new ResponseEntity<>(pastTournamentData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

@@ -13,8 +13,9 @@ import java.util.List;
 
         List<Person> findByLastName(@Param("lastName") String lastName);
 
+
         /*
-        List<Person> findById(@Param("Id") Integer Id);
+        List<Person> findById(@Param("Id") long Id);
         List<Person> findByFirstName(@Param("name") String name);
         List<Person> findByLastName(@Param("name") String name);
         List<Person> findByEmailAddress(@Param("emailAddress") String emailAddress);

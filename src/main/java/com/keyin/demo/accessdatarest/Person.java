@@ -22,6 +22,7 @@ public class Person {
     public Person() {
     }
 
+
     public Person(String firstName, String lastName, String emailAddress,
                   int phoneNumber, LocalDate startDate, LocalDate endDate) {
         this.firstName = firstName;
@@ -70,10 +71,6 @@ public class Person {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public LocalDate getID() {
-        return startDate;
     }
 
     public LocalDate getStartDate(){

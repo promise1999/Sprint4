@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource(collectionResourceRel = "PastTournament", path = "PastTournament")
+@RepositoryRestResource(collectionResourceRel = "pastTournament", path = "pastTournament")
 public interface PastTournamentRepository extends PagingAndSortingRepository<PastTournament, Long> {
 
     List<PastTournament> findByEndDate(@Param("endDate") String endDate);

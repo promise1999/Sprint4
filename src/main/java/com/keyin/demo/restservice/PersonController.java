@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Id;
+
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
@@ -38,6 +40,16 @@ public class PersonController {
             return new ResponseEntity<>(person, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/person/{Id}")
+    public ResponseEntity<Person> getPersonById(@PathVariable("Id") long Id) {
+        Optional<Person> personData = personRepository.findById(Id);
+        if (personData.isPresent()){
+            return new ResponseEntity<>(personData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
