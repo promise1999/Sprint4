@@ -15,6 +15,7 @@ public class CurrentTournament {
     private int prizeAmount;
     private String participatingMembers;
     private String finalStandings;
+
     @OneToOne
     @JoinColumn(name = "person_Id")
     private Person person;
