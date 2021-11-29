@@ -24,7 +24,7 @@ public class CurrentTournamentController {
     CurrentTournamentRepository currentTournamentRepository;
 
 
-    @GetMapping("/CurrentTournament")
+    @GetMapping("/currentTournament")
     public ResponseEntity<List<CurrentTournament>> getAllCurrentTournament(@RequestParam(required = false) String startDate) {
         try {
             List<CurrentTournament> currentTournaments = new ArrayList<CurrentTournament>();
