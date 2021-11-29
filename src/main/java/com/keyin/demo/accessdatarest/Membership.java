@@ -12,7 +12,6 @@ public class Membership {
     private String specialOffer;
     private String familyPlan;
     private String other;
-
     @OneToOne
     @JoinColumn(name = "person_id")
     private Person person;
