@@ -93,31 +93,4 @@ public class CurrentTournamentController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-/*
-    @DeleteMapping("/currentTournament")
-    public ResponseEntity<HttpStatus> deleteAllCurrentTournament() {
-        try {
-            CurrentTournamentRepository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-
-    @GetMapping("/currentTournament/published")
-    public ResponseEntity<List<CurrentTournament>> findByPublished() {
-        try {
-            List<CurrentTournament> currentTournament = CurrentTournamentRepository.findByPublished(true);
-
-            if (currentTournament.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(currentTournament, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-*/
 }
